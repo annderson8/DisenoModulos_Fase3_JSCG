@@ -68,6 +68,150 @@ Partial Public Class Questions
     Protected WithEvents RadioButtonListQuestionTwo As Global.System.Web.UI.WebControls.RadioButtonList
 
     '''<summary>
+    '''Control ViewQuestionThree.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ViewQuestionThree As Global.System.Web.UI.WebControls.View
+
+    '''<summary>
+    '''Control RadioButtonListQuestionThree.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents RadioButtonListQuestionThree As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''Control ViewQuestionFour.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ViewQuestionFour As Global.System.Web.UI.WebControls.View
+
+    '''<summary>
+    '''Control RadioButtonListQuestionFour.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents RadioButtonListQuestionFour As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''Control ViewQuestionFive.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ViewQuestionFive As Global.System.Web.UI.WebControls.View
+
+    '''<summary>
+    '''Control RadioButtonListQuestionFive.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents RadioButtonListQuestionFive As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''Control ViewQuestionSix.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ViewQuestionSix As Global.System.Web.UI.WebControls.View
+
+    '''<summary>
+    '''Control RadioButtonListQuestionSix.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents RadioButtonListQuestionSix As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''Control ViewQuestionSeven.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ViewQuestionSeven As Global.System.Web.UI.WebControls.View
+
+    '''<summary>
+    '''Control RadioButtonListQuestionSeven.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents RadioButtonListQuestionSeven As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''Control ViewQuestionEight.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ViewQuestionEight As Global.System.Web.UI.WebControls.View
+
+    '''<summary>
+    '''Control RadioButtonListQuestionEight.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents RadioButtonListQuestionEight As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''Control ViewQuestionNine.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ViewQuestionNine As Global.System.Web.UI.WebControls.View
+
+    '''<summary>
+    '''Control RadioButtonListQuestionNine.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents RadioButtonListQuestionNine As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''Control ViewQuestionTen.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ViewQuestionTen As Global.System.Web.UI.WebControls.View
+
+    '''<summary>
+    '''Control RadioButtonListQuestionTen.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents RadioButtonListQuestionTen As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
     '''Control ButtonNextQuestion.
     '''</summary>
     '''<remarks>
