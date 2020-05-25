@@ -212,6 +212,15 @@ Partial Public Class Questions
     Protected WithEvents RadioButtonListQuestionTen As Global.System.Web.UI.WebControls.RadioButtonList
 
     '''<summary>
+    '''Control ButtonPreviousQuestion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ButtonPreviousQuestion As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''Control ButtonNextQuestion.
     '''</summary>
     '''<remarks>
@@ -219,6 +228,15 @@ Partial Public Class Questions
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents ButtonNextQuestion As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control ButtonNextEndExam.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ButtonNextEndExam As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control ButtonRestartExam.

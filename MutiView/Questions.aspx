@@ -235,7 +235,10 @@
 		</div>
 		&nbsp;
 		<div>
+			<asp:Button ID="ButtonPreviousQuestion" runat="server" Visible="false" Text="Previous Question" />
+			&nbsp;
 			<asp:Button ID="ButtonNextQuestion" runat="server" Visible="false" Text="Next Question" />
+			<asp:Button ID="ButtonNextEndExam" runat="server" Visible="false" Text="End Exam" OnClientClick="return confirm('You are sure?, at the end of the exam the selected answers are verified')" />
 			&nbsp;
 			<asp:Button ID="ButtonRestartExam" runat="server" Visible="false" Text="Restart Exam" OnClientClick="return confirm('You want to restart the exam?, this affects the selected answers.')" />
 		</div>
