@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Questions.aspx" />
+    <Content Include="SeeAnswers.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +129,13 @@
     </Compile>
     <Compile Include="Questions.aspx.vb">
       <DependentUpon>Questions.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="SeeAnswers.aspx.designer.vb">
+      <DependentUpon>SeeAnswers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SeeAnswers.aspx.vb">
+      <DependentUpon>SeeAnswers.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>

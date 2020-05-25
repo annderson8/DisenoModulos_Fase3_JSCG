@@ -2,8 +2,8 @@
     Inherits System.Web.UI.Page
 
     Private ReadOnly Answers = New String() {"D", "A", "C", "B", "D", "B", "C", "A", "D", "C"}
-    Private Property AnswersCounter As Integer
     Private Const LessAView As Integer = 1
+    Private Property SelectedAnswers As String()
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
@@ -16,14 +16,10 @@
         ButtonPreviousQuestion.Visible = Visibility
         ButtonNextQuestion.Visible = Visibility
         ButtonNextEndExam.Visible = Not Visibility
-        ButtonRestartExam.Visible = Not Visibility
     End Sub
 
     Private Sub RestartExam()
-        Const NoAnswers As Integer = 0
         MultiViewPrincipal.SetActiveView(ViewQuestionOne)
-        AnswersCounter = NoAnswers
-        Session.Add("AnswersCounter", AnswersCounter)
         ClearSelectedAnswer(RadioButtonListQuestionOne)
         ClearSelectedAnswer(RadioButtonListQuestionTwo)
         ClearSelectedAnswer(RadioButtonListQuestionThree)
@@ -34,6 +30,8 @@
         ClearSelectedAnswer(RadioButtonListQuestionEight)
         ClearSelectedAnswer(RadioButtonListQuestionNine)
         ClearSelectedAnswer(RadioButtonListQuestionTen)
+        Session("Answers") = Nothing
+        Session("SelectedAnswers") = Nothing
     End Sub
 
     Private Sub ClearSelectedAnswer(RadioButtonList As RadioButtonList)
@@ -95,47 +93,34 @@
         End If
     End Function
 
-    Private Sub AddAnswer(ActualView As Integer)
+    Private Function GetAnswer(ActualView As Integer) As String
         Dim ActualAnswersPosition As Integer
         ActualAnswersPosition = ActualView - LessAView
         Select Case ActualView
             Case 1
-                ValidationAnswer(RadioButtonListQuestionOne, ActualAnswersPosition)
+                GetAnswer = RadioButtonListQuestionOne.SelectedValue
             Case 2
-                ValidationAnswer(RadioButtonListQuestionTwo, ActualAnswersPosition)
+                GetAnswer = RadioButtonListQuestionTwo.SelectedValue
             Case 3
-                ValidationAnswer(RadioButtonListQuestionThree, ActualAnswersPosition)
+                GetAnswer = RadioButtonListQuestionThree.SelectedValue
             Case 4
-                ValidationAnswer(RadioButtonListQuestionFour, ActualAnswersPosition)
+                GetAnswer = RadioButtonListQuestionFour.SelectedValue
             Case 5
-                ValidationAnswer(RadioButtonListQuestionFive, ActualAnswersPosition)
+                GetAnswer = RadioButtonListQuestionFive.SelectedValue
             Case 6
-                ValidationAnswer(RadioButtonListQuestionSix, ActualAnswersPosition)
+                GetAnswer = RadioButtonListQuestionSix.SelectedValue
             Case 7
-                ValidationAnswer(RadioButtonListQuestionSeven, ActualAnswersPosition)
+                GetAnswer = RadioButtonListQuestionSeven.SelectedValue
             Case 8
-                ValidationAnswer(RadioButtonListQuestionEight, ActualAnswersPosition)
+                GetAnswer = RadioButtonListQuestionEight.SelectedValue
             Case 9
-                ValidationAnswer(RadioButtonListQuestionNine, ActualAnswersPosition)
+                GetAnswer = RadioButtonListQuestionNine.SelectedValue
             Case 10
-                ValidationAnswer(RadioButtonListQuestionTen, ActualAnswersPosition)
+                GetAnswer = RadioButtonListQuestionTen.SelectedValue
+            Case Else
+                GetAnswer = "N/A"
         End Select
-    End Sub
-
-    Private Sub ValidationAnswer(RadioButtonList As RadioButtonList, ActualAnswersPosition As Integer)
-        Const CorrectAnswerValue = 1
-        AnswersCounter = Convert.ToInt32(Session.Contents("AnswersCounter"))
-        Session.Add("AnswersCounter", AnswersCounter)
-        If RadioButtonList.SelectedValue = Answers(ActualAnswersPosition) Then
-            AnswersCounter += CorrectAnswerValue
-        End If
-        Session.Add("AnswersCounter", AnswersCounter)
-    End Sub
-
-    Protected Sub ButtonRestartExam_Click(sender As Object, e As EventArgs) Handles ButtonRestartExam.Click
-        RestartExam()
-        SetVisibilityButtons(True)
-    End Sub
+    End Function
 
     Private Sub SendMessage(Message As String)
         Dim sb As New StringBuilder()
@@ -158,16 +143,15 @@
     End Sub
 
     Protected Sub ButtonNextEndExam_Click(sender As Object, e As EventArgs) Handles ButtonNextEndExam.Click
+        Session("Answers") = Answers
         Const StepCount As Integer = 1
-        Const TotalAnswersValue As Integer = 100
+        Const AnswerForValue As Integer = 0
         Dim Answer As Integer
-        For Answer = 1 To Answers.Length Step StepCount
-            AddAnswer(Answer)
+        ReDim SelectedAnswers(Answers.Length - 1)
+        For Answer = AnswerForValue To Answers.Length - 1 Step StepCount
+            SelectedAnswers(Answer) = GetAnswer(Answer + StepCount)
         Next Answer
-        Dim TotalAnswers As Integer
-        TotalAnswers = Answers.Length
-        AnswersCounter = Convert.ToInt32(Session.Contents("AnswersCounter"))
-        Dim PercentageAnswers = (AnswersCounter * TotalAnswersValue) / TotalAnswers
-        SendMessage("Correct answers: " & AnswersCounter & " on: " & TotalAnswers & " Percentage: " & PercentageAnswers & "%")
+        Session("SelectedAnswers") = SelectedAnswers
+        Response.Redirect("SeeAnswers.aspx")
     End Sub
 End Class

@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class Questions
 
     '''<summary>
-    '''Control form.
+    '''Control formQuestions.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents form As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents formQuestions As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
     '''Control MultiViewPrincipal.
@@ -237,13 +237,4 @@ Partial Public Class Questions
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents ButtonNextEndExam As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Control ButtonRestartExam.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents ButtonRestartExam As Global.System.Web.UI.WebControls.Button
 End Class
