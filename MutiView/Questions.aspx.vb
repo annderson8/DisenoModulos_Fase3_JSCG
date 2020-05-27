@@ -1,10 +1,21 @@
 ﻿Public Class Questions
     Inherits System.Web.UI.Page
 
+#Region "Variables or constants"
+
     Private ReadOnly Answers = New String() {"D", "A", "C", "B", "D", "B", "C", "A", "D", "C"}
     Private Const LessAView As Integer = 1
     Private Property SelectedAnswers As String()
 
+#End Region
+
+#Region "Events"
+
+    ''' <summary>
+    ''' Initial page event
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
             RestartExam()
@@ -12,12 +23,72 @@
         End If
     End Sub
 
+    ''' <summary>
+    ''' Next button event question
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Protected Sub ButtonNextQuestion_Click(sender As Object, e As EventArgs) Handles ButtonNextQuestion.Click
+        Const NextView As Integer = 1
+        Dim MaxViews = MultiViewPrincipal.Views.Count - LessAView
+        If SelectedAnswer() Then
+            If MultiViewPrincipal.ActiveViewIndex < MaxViews Then
+                MultiViewPrincipal.ActiveViewIndex = MultiViewPrincipal.ActiveViewIndex + NextView
+            Else
+                SetVisibilityButtons(False)
+            End If
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Previous button event question
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Protected Sub ButtonPreviousQuestion_Click(sender As Object, e As EventArgs) Handles ButtonPreviousQuestion.Click
+        Const MinimumNumberOfViews As Integer = 0
+        If MultiViewPrincipal.ActiveViewIndex > MinimumNumberOfViews Then
+            MultiViewPrincipal.ActiveViewIndex = MultiViewPrincipal.ActiveViewIndex - LessAView
+        Else
+            SendMessage("You can not back is on the first question")
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' End button event exam
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Protected Sub ButtonNextEndExam_Click(sender As Object, e As EventArgs) Handles ButtonNextEndExam.Click
+        Session("Answers") = Answers
+        Const StepCount As Integer = 1
+        Const AnswerForValue As Integer = 0
+        Dim Answer As Integer
+        ReDim SelectedAnswers(Answers.Length - 1)
+        For Answer = AnswerForValue To Answers.Length - 1 Step StepCount
+            SelectedAnswers(Answer) = GetAnswer(Answer + StepCount)
+        Next Answer
+        Session("SelectedAnswers") = SelectedAnswers
+        Response.Redirect("SeeAnswers.aspx")
+    End Sub
+
+#End Region
+
+#Region "Methods and functions"
+
+    ''' <summary>
+    ''' Method that sets the visibility of buttons
+    ''' </summary>
+    ''' <param name="Visibility">Boolean parameter that sets the visibility of the buttons</param>
     Private Sub SetVisibilityButtons(Visibility As Boolean)
         ButtonPreviousQuestion.Visible = Visibility
         ButtonNextQuestion.Visible = Visibility
         ButtonNextEndExam.Visible = Not Visibility
     End Sub
 
+    ''' <summary>
+    ''' Method that restores the exam
+    ''' </summary>
     Private Sub RestartExam()
         MultiViewPrincipal.SetActiveView(ViewQuestionOne)
         ClearSelectedAnswer(RadioButtonListQuestionOne)
@@ -34,23 +105,19 @@
         Session("SelectedAnswers") = Nothing
     End Sub
 
+    ''' <summary>
+    ''' Method that restores the selected answer in the question
+    ''' </summary>
+    ''' <param name="RadioButtonList">Control name to reset</param>
     Private Sub ClearSelectedAnswer(RadioButtonList As RadioButtonList)
         Const NoResponseSelection As Integer = -1
         RadioButtonList.SelectedIndex = NoResponseSelection
     End Sub
 
-    Protected Sub ButtonNextQuestion_Click(sender As Object, e As EventArgs) Handles ButtonNextQuestion.Click
-        Const NextView As Integer = 1
-        Dim MaxViews = MultiViewPrincipal.Views.Count - LessAView
-        If SelectedAnswer() Then
-            If MultiViewPrincipal.ActiveViewIndex < MaxViews Then
-                MultiViewPrincipal.ActiveViewIndex = MultiViewPrincipal.ActiveViewIndex + NextView
-            Else
-                SetVisibilityButtons(False)
-            End If
-        End If
-    End Sub
-
+    ''' <summary>
+    ''' Function that validates if the user has selected an answer to the question
+    ''' </summary>
+    ''' <returns>Boolean that specifies whether the user has selected a question</returns>
     Private Function SelectedAnswer() As Boolean
         Const MoreAView = 1
         Dim ActualView As Integer
@@ -83,7 +150,13 @@
         End Select
     End Function
 
-    Private Function ValidateSelectedAnswer(RadioButtonList As RadioButtonList, MessageValidation As String)
+    ''' <summary>
+    ''' Function that checks if the user has selected an answer
+    ''' </summary>
+    ''' <param name="RadioButtonList">Object with possible response options</param>
+    ''' <param name="MessageValidation">Validation message</param>
+    ''' <returns></returns>
+    Private Function ValidateSelectedAnswer(RadioButtonList As RadioButtonList, MessageValidation As String) As Boolean
         Const NoSelectedResponse = 0
         If RadioButtonList.SelectedIndex < NoSelectedResponse Then
             SendMessage(MessageValidation)
@@ -93,6 +166,11 @@
         End If
     End Function
 
+    ''' <summary>
+    ''' Function that gets the answer per question
+    ''' </summary>
+    ''' <param name="ActualView">Current question</param>
+    ''' <returns>Answer to the question</returns>
     Private Function GetAnswer(ActualView As Integer) As String
         Dim ActualAnswersPosition As Integer
         ActualAnswersPosition = ActualView - LessAView
@@ -122,6 +200,10 @@
         End Select
     End Function
 
+    ''' <summary>
+    ''' Method that allows Javascript to be sent to the browser
+    ''' </summary>
+    ''' <param name="Message">Message to send, cannot contain special characters</param>
     Private Sub SendMessage(Message As String)
         Dim sb As New StringBuilder()
         sb.Append("<script type = 'text/javascript'>")
@@ -133,25 +215,6 @@
         ClientScript.RegisterClientScriptBlock(Me.GetType(), "alert", sb.ToString())
     End Sub
 
-    Protected Sub ButtonPreviousQuestion_Click(sender As Object, e As EventArgs) Handles ButtonPreviousQuestion.Click
-        Const MinimumNumberOfViews As Integer = 0
-        If MultiViewPrincipal.ActiveViewIndex > MinimumNumberOfViews Then
-            MultiViewPrincipal.ActiveViewIndex = MultiViewPrincipal.ActiveViewIndex - LessAView
-        Else
-            SendMessage("You can not back is on the first question")
-        End If
-    End Sub
+#End Region
 
-    Protected Sub ButtonNextEndExam_Click(sender As Object, e As EventArgs) Handles ButtonNextEndExam.Click
-        Session("Answers") = Answers
-        Const StepCount As Integer = 1
-        Const AnswerForValue As Integer = 0
-        Dim Answer As Integer
-        ReDim SelectedAnswers(Answers.Length - 1)
-        For Answer = AnswerForValue To Answers.Length - 1 Step StepCount
-            SelectedAnswers(Answer) = GetAnswer(Answer + StepCount)
-        Next Answer
-        Session("SelectedAnswers") = SelectedAnswers
-        Response.Redirect("SeeAnswers.aspx")
-    End Sub
 End Class
